@@ -1,2 +1,3 @@
 # odin-rockPaperScissor
-From the odin project, Rock Paper Scissor project
+
+From the odin project, Rock Paper Scissors project
