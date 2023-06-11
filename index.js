@@ -3,10 +3,24 @@
 let playerScore = 0;
 let computerScore = 0;
 
+// Getting the computer choice
+
+const getComputerChoice = function () {
+  const number = Math.floor(Math.random() * 3) + 1;
+  let choice = undefined;
+  if (number == 1) {
+    choice = "rock";
+  } else if (number == 2) {
+    choice = "paper";
+  } else if (number == 3) {
+    choice = "scissors";
+  }
+  return choice;
+};
+
 // Play one round
 
 const playRound = function (playerSelection, computerSelection) {
-  // let computerChoice = computerSelection();
   if (playerSelection == computerSelection) {
     return "It's a draw!";
   } else if (playerSelection == "rock") {
@@ -34,26 +48,14 @@ const game = function () {
     let computerSelection = getComputerChoice();
     let result = playRound(playerSelection, computerSelection);
     if (result.includes("win")) {
-      console.log(`round ${i + 1}result in the if :`, result);
+      console.log(`Round ${i + 1}! `, result);
       playerScore = playerScore + 1;
     } else {
-      console.log(`round ${i + 1} result in the else :`, result);
+      console.log(`Round ${i + 1}! `, result);
       computerScore = computerScore + 1;
     }
   }
-};
-
-// Getting the computer choice
-
-const getComputerChoice = function () {
-  const number = Math.floor(Math.random() * 3) + 1;
-  let choice = undefined;
-  if (number == 1) {
-    choice = "rock";
-  } else if (number == 2) {
-    choice = "paper";
-  } else if (number == 3) {
-    choice = "scissors";
-  }
-  return choice;
+  playerScore > computerScore
+    ? console.log(`You won ${playerScore} to ${computerScore} !`)
+    : console.log(`You lost ${computerScore} to ${playerScore} !`);
 };
