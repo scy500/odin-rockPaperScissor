@@ -1,12 +1,40 @@
+let textbox = document.querySelector(".textbox");
+let playerSpan = document.querySelector(".player");
+let comSpan = document.querySelector(".com");
+
+// audio files
+
+let rockAudio = document.querySelector("#rockAudio");
+let paperAudio = 0;
+let scissorsAudio = 0;
+
 // Set scores
 
 let playerScore = 0;
 let computerScore = 0;
+let round = 0;
+let playerSelection = "";
+let gameover = false;
 
-// Play one round
+let reset = function () {
+  playerScore = 0;
+  computerScore = 0;
+  round = 0;
+  playerSelection = "";
+  playerSpan.innerText = playerScore;
+  comSpan.innerText = computerScore;
+  textbox.innerText = "Start playing by clicking !";
+  gameover = false;
+};
+// set choices
 
-const playRound = function (playerSelection, computerSelection) {
-  // let computerChoice = computerSelection();
+let rock = document.querySelector(".rock");
+let paper = document.querySelector(".paper");
+let scissor = document.querySelector(".scissor");
+
+// Play one round - check winner
+
+const checkWinner = function (playerSelection, computerSelection) {
   if (playerSelection == computerSelection) {
     return "It's a draw!";
   } else if (playerSelection == "rock") {
@@ -27,22 +55,55 @@ const playRound = function (playerSelection, computerSelection) {
 // Play the game
 
 const game = function () {
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt(
-      "Rock Paper Scissors! What do you choose?"
-    ).toLowerCase();
+  if (!gameover) {
     let computerSelection = getComputerChoice();
-    let result = playRound(playerSelection, computerSelection);
+    let result = checkWinner(playerSelection, computerSelection);
     if (result.includes("win")) {
-      console.log(`round ${i + 1}result in the if :`, result);
       playerScore = playerScore + 1;
+      playerSpan.innerText = playerScore;
     } else {
-      console.log(`round ${i + 1} result in the else :`, result);
       computerScore = computerScore + 1;
+      comSpan.innerText = computerScore;
+    }
+    console.log(result);
+    round++;
+    textbox.innerText = `Round ${round}`;
+    if (round == 5) {
+      playerScore > computerScore
+        ? (textbox.innerText = `Player won with ${playerScore} vs ${computerScore} ! Click for new game !`)
+        : (textbox.innerText = `Computer won with ${computerScore} vs ${playerScore} ! Click for new game !`);
+      gameover = true;
+      textbox.addEventListener("click", function () {
+        reset();
+      });
     }
   }
 };
 
+// Get player choice and play one round
+if (!gameover) {
+  rock.addEventListener("click", function () {
+    let audio = new Audio("audio/stone.mp3");
+    audio.play();
+    playerSelection = "rock";
+    console.log("rock");
+    game();
+  });
+  paper.addEventListener("click", function () {
+    let audio = new Audio("audio/paper.mp3");
+    audio.play();
+    playerSelection = "paper";
+    console.log("paper");
+    game();
+  });
+  scissor.addEventListener("click", function () {
+    let audio = new Audio("audio/scissors.mp3");
+    audio.play();
+    playerSelection = "scissors";
+    console.log("scissors");
+    game();
+  });
+}
 // Getting the computer choice
 
 const getComputerChoice = function () {
