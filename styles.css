@@ -1,0 +1,63 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 700;
+  color: #555;
+  overflow-x: hidden;
+  background-color: #00539c;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+img:hover {
+  cursor: pointer;
+}
+
+main {
+  margin-top: 6rem;
+}
+
+.container {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.2rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eea47f;
+  border-radius: 60px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.gap {
+  gap: 12rem;
+}
+
+.textbox,
+.scorebox {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.selectHand {
+  border: 1px solid black;
+}
